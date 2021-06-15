@@ -1,4 +1,5 @@
 from contract import accounts
+from create_account import Create
 import tkinter as tk
 from tkinter import Button, StringVar, messagebox,W ,FLAT, NW
 
@@ -16,17 +17,13 @@ class app():
         title = tk.Label(self.root,text='股票交易平台',font =('微軟正黑體', 20,"bold"),width=15,height=1).grid(column=0,row=7)
         ############################
 
-
         #################輸入私鑰和地址
         p=StringVar()
         a=StringVar()
-
         p.set('輸入你的私鑰')
         a.set('輸入你的地址')
-
         self.p_value = tk.Entry(self.root,text=p)
         self.a_value = tk.Entry(self.root,text=a)                         
-        
         self.p_value.grid(column=0,row=8)
         self.a_value.grid(column=0,row=9)
 
@@ -35,14 +32,45 @@ class app():
         account_btn.grid(column=0,row=10)
         #############################
 
+        # #################創帳號
+        # create_btn = Button(text='創建帳戶')
+        # create_btn.config(command=self.createInfo)
+        # create_btn.grid(column=1,row=10)
+        # #################創帳號
+
         self.root.mainloop()
+
+    # def createInfo(self):
+    #     self.info = Create()
+    #     send = tk.Label(self.root,text='輸入你的密碼:',font =('微軟正黑體', 10,"bold")).grid(column=2,row=10)
+    #     self.password = tk.Entry(self.root)
+    #     self.password.grid(column=3,row=10)
+    #     create_btn = Button(text='送出')
+    #     create_btn.config(command=self.create_success)
+    #     create_btn.grid(column=4,row=10)
+
+    # def create_success(self):
+    #     p = tk.Label(self.root,text='私鑰:',font =('微軟正黑體', 10,"bold")).grid(column=5,row=10)
+    #     pri,adr = self.info.create_new(int(self.password.get()))
+    #     priv = tk.Text(self.root,width=20,height=4,font = ('微軟正黑體', 10 ,"bold"))
+    #     priv.insert(1.0,pri)
+    #     priv.configure(state='disable')
+    #     priv.grid(column=6,row=10)
+
+    #     a = tk.Label(self.root,text='地址:',font =('微軟正黑體', 10,"bold")).grid(column=7,row=10)
+    #     addr = tk.Text(self.root,width=20,height=4,font = ('微軟正黑體', 10 ,"bold"))
+    #     addr.insert(1.0,adr)
+    #     addr.configure(state='disable')
+    #     addr.grid(column=8,row=10)
+
+    #     messagebox.showinfo('Info','請保存你的私鑰和地址')
+
 
     def your_account(self):
         
         self.priv_key = str(self.p_value.get())
         self.address = str(self.a_value.get()) 
 
-        
         if(self.priv_key == '0x8d37eafd6953fc0d09ec77a53409e590d764d17f496bb7a74bfad79bb37fcfa9' and self.address == '0x5677Ef7312ae71Cc99435fa7B81B0978ebBC67d9'):
             messagebox.showinfo('Info','歡迎，證券商')
             self.user = accounts(self.priv_key,self.address)
@@ -75,7 +103,6 @@ class app():
         issue_btn.grid(column=3,row=1)
         ###給錢###(row=1)
 
-
         ###更新股票價錢####(row=2)
         self.stockPri_text = tk.Label(self.root,text='更新股票價錢:',font =('微軟正黑體', 12 ,"bold")).grid(column=0,row=2)
         self.stockPri_value = tk.Entry(self.root)
@@ -84,7 +111,6 @@ class app():
         updatePrice_btn.config(command=self.send_stockPri)
         updatePrice_btn.grid(column=2,row=2)
         ###更新股票價錢####(row=2)
-
 
         ###更新股票數目####(row=3)
         self.stockQua_text = tk.Label(self.root,text='更新股票數目:',font =('微軟正黑體', 12 ,"bold")).grid(column=0,row=3)
@@ -95,13 +121,11 @@ class app():
         updateQua_btn.grid(column=2,row=3)
         ###更新股票數目####(row=3)
 
-
         ###確認股票價錢####(row=4)
         checkPrice_btn = Button(text='股票價錢:')
         checkPrice_btn.config(command=self.checkPri)
         checkPrice_btn.grid(column=0,row=5)
         ###確認股票價錢####(row=4)
-
 
         ###確認股票數目####(row=5)
         checkStock_btn = Button(text='剩餘股票:')
@@ -139,20 +163,17 @@ class app():
         checkPrice_btn.grid(column=0,row=3)
         ###查看你的餘額####(row=4)
 
-
         ###查看你的股票數目####(row=5)
         checkStock_btn = Button(text='查看你的股票數目:')
         checkStock_btn.config(command=self.myStock)
         checkStock_btn.grid(column=0,row=4)       
          ###查看你的股票數目####(row=5)
 
-        
         ###確認股票價錢####(row=4)
         checkPrice_btn = Button(text='股票價錢:')
         checkPrice_btn.config(command=self.checkPri)
         checkPrice_btn.grid(column=0,row=5)
         ###確認股票價錢####(row=4)
-
 
         ###確認股票數目####(row=5)
         checkStock_btn = Button(text='剩餘股票:')
