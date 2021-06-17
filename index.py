@@ -3,11 +3,14 @@ from contract import accounts
 from create_account import Create
 import tkinter as tk
 from tkinter import Button, StringVar, messagebox,W ,FLAT, NW
+from requests import request
+import json
 
 back = '#22243d'
 red_back='#f14d58'
 # red_front='#f14d58'
 btn_back = '#3a3c52'
+
 
 class app():
     def __init__(self):
@@ -17,6 +20,12 @@ class app():
         
         
     def main(self):
+        response = request('get', 'https://api.fintechspace.com.tw/realtime/v0/intraday/chart')
+        data = json.loads(response.text)
+        for i in data['chart']:
+            for j in next(iter(i)):
+                self.sto_pri = j['close']
+
         #########################介面
         self.root = tk.Tk()
         self.root.title("股票交易APP")
@@ -78,20 +87,6 @@ class app():
         self.priv_key = str(self.p_value.get())
         self.address = str(self.a_value.get()) 
 
-        # if(self.priv_key == '0x8d37eafd6953fc0d09ec77a53409e590d764d17f496bb7a74bfad79bb37fcfa9' and self.address == '0x5677Ef7312ae71Cc99435fa7B81B0978ebBC67d9'):
-        #     messagebox.showinfo('Info','歡迎，證券商')
-        #     self.user = accounts(self.priv_key,self.address)
-        #     self.IsSecurity = True
-        #     self.Security_firms()
-        # elif(self.priv_key == '0xa2a0563a83b4d97b27a86186e1f3b74d0ca61be90bce19072110f1e3c6525756' and self.address == '0x9e47aa25A8a75c444965701605e95ac72d1aF3Cd'):
-        #     messagebox.showinfo('Info','歡迎，投資者')
-        #     self.user = accounts(self.priv_key,self.address)
-        #     self.IsInvestor = True
-        #     self.investor()
-        # else:
-        #     messagebox.showinfo('Info','請輸入正確私鑰與地址')
-        #     return
-
         if(self.priv_key == '0x8d37eafd6953fc0d09ec77a53409e590d764d17f496bb7a74bfad79bb37fcfa9' and self.address == '0x5677Ef7312ae71Cc99435fa7B81B0978ebBC67d9'):
             messagebox.showinfo('Info','歡迎，證券商')
             self.user = accounts(self.priv_key,self.address)
@@ -123,8 +118,8 @@ class app():
 
         ###更新股票價錢####(row=2)
         self.stockPri_text = tk.Label(self.root,text='更新股票價錢:',font =('微軟正黑體', 12 ,"bold"),bg=back,fg='white').grid(column=0,row=2)
-        self.stockPri_value = tk.Entry(self.root)
-        self.stockPri_value.grid(column=1,row=2)
+        # self.stockPri_value = tk.Entry(self.root)
+        # self.stockPri_value.grid(column=1,row=2)
         updatePrice_btn = Button(text='送出更新的股票價錢',bg=btn_back,fg='white')
         updatePrice_btn.config(command=self.send_stockPri)
         updatePrice_btn.grid(column=2,row=2)
@@ -212,8 +207,8 @@ class app():
         messagebox.showinfo('Info','已送出')        
 
     def send_stockPri(self):
-        stockPri = int(self.stockPri_value.get())
-        hash= self.user.updatePrice(stockPri)
+        # stockPri = int(self.stockPri_value.get())
+        hash= self.user.updatePrice(self.sto_pri)
         pri_hash = tk.Text(self.root,width=20,height=4,font =('微軟正黑體', 10 ,"bold"))
         pri_hash.insert(1.0,hash)
         pri_hash.configure(state='disable')
