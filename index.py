@@ -39,38 +39,38 @@ class app():
         account_btn.grid(column=0,row=10)
         #############################
 
-        # #################創帳號
-        # create_btn = Button(text='創建帳戶')
-        # create_btn.config(command=self.createInfo)
-        # create_btn.grid(column=1,row=10)
-        # #################創帳號
+        #################創帳號
+        create_btn = Button(text='創建帳戶')
+        create_btn.config(command=self.createInfo)
+        create_btn.grid(column=1,row=10)
+        #################創帳號
 
         self.root.mainloop()
 
-    # def createInfo(self):
-    #     self.info = Create()
-    #     send = tk.Label(self.root,text='輸入你的密碼:',font =('微軟正黑體', 10,"bold")).grid(column=2,row=10)
-    #     self.password = tk.Entry(self.root)
-    #     self.password.grid(column=3,row=10)
-    #     create_btn = Button(text='送出')
-    #     create_btn.config(command=self.create_success)
-    #     create_btn.grid(column=4,row=10)
+    def createInfo(self):
+        self.info = Create()
+        send = tk.Label(self.root,text='輸入你的密碼:',font =('微軟正黑體', 10,"bold")).grid(column=2,row=10)
+        self.password = tk.Entry(self.root)
+        self.password.grid(column=3,row=10)
+        create_btn = Button(text='送出')
+        create_btn.config(command=self.create_success)
+        create_btn.grid(column=4,row=10)
 
-    # def create_success(self):
-    #     p = tk.Label(self.root,text='私鑰:',font =('微軟正黑體', 10,"bold")).grid(column=5,row=10)
-    #     pri,adr = self.info.create_new(int(self.password.get()))
-    #     priv = tk.Text(self.root,width=20,height=4,font = ('微軟正黑體', 10 ,"bold"))
-    #     priv.insert(1.0,pri)
-    #     priv.configure(state='disable')
-    #     priv.grid(column=6,row=10)
+    def create_success(self):
+        p = tk.Label(self.root,text='私鑰:',font =('微軟正黑體', 10,"bold")).grid(column=5,row=10)
+        pri,adr = self.info.create_new(int(self.password.get()))
+        priv = tk.Text(self.root,width=20,height=4,font = ('微軟正黑體', 10 ,"bold"))
+        priv.insert(1.0,pri)
+        priv.configure(state='disable')
+        priv.grid(column=6,row=10)
 
-    #     a = tk.Label(self.root,text='地址:',font =('微軟正黑體', 10,"bold")).grid(column=7,row=10)
-    #     addr = tk.Text(self.root,width=20,height=4,font = ('微軟正黑體', 10 ,"bold"))
-    #     addr.insert(1.0,adr)
-    #     addr.configure(state='disable')
-    #     addr.grid(column=8,row=10)
+        a = tk.Label(self.root,text='地址:',font =('微軟正黑體', 10,"bold")).grid(column=7,row=10)
+        addr = tk.Text(self.root,width=20,height=4,font = ('微軟正黑體', 10 ,"bold"))
+        addr.insert(1.0,adr)
+        addr.configure(state='disable')
+        addr.grid(column=8,row=10)
 
-    #     messagebox.showinfo('Info','請保存你的私鑰和地址')
+        messagebox.showinfo('Info','請保存你的私鑰和地址')
 
 
     def your_account(self):
@@ -78,19 +78,30 @@ class app():
         self.priv_key = str(self.p_value.get())
         self.address = str(self.a_value.get()) 
 
+        # if(self.priv_key == '0x8d37eafd6953fc0d09ec77a53409e590d764d17f496bb7a74bfad79bb37fcfa9' and self.address == '0x5677Ef7312ae71Cc99435fa7B81B0978ebBC67d9'):
+        #     messagebox.showinfo('Info','歡迎，證券商')
+        #     self.user = accounts(self.priv_key,self.address)
+        #     self.IsSecurity = True
+        #     self.Security_firms()
+        # elif(self.priv_key == '0xa2a0563a83b4d97b27a86186e1f3b74d0ca61be90bce19072110f1e3c6525756' and self.address == '0x9e47aa25A8a75c444965701605e95ac72d1aF3Cd'):
+        #     messagebox.showinfo('Info','歡迎，投資者')
+        #     self.user = accounts(self.priv_key,self.address)
+        #     self.IsInvestor = True
+        #     self.investor()
+        # else:
+        #     messagebox.showinfo('Info','請輸入正確私鑰與地址')
+        #     return
+
         if(self.priv_key == '0x8d37eafd6953fc0d09ec77a53409e590d764d17f496bb7a74bfad79bb37fcfa9' and self.address == '0x5677Ef7312ae71Cc99435fa7B81B0978ebBC67d9'):
             messagebox.showinfo('Info','歡迎，證券商')
             self.user = accounts(self.priv_key,self.address)
             self.IsSecurity = True
             self.Security_firms()
-        elif(self.priv_key == '0xa2a0563a83b4d97b27a86186e1f3b74d0ca61be90bce19072110f1e3c6525756' and self.address == '0x9e47aa25A8a75c444965701605e95ac72d1aF3Cd'):
+        else:
             messagebox.showinfo('Info','歡迎，投資者')
             self.user = accounts(self.priv_key,self.address)
             self.IsInvestor = True
             self.investor()
-        else:
-            messagebox.showinfo('Info','請輸入正確私鑰與地址')
-            return
 
     def Security_firms(self):
         if(self.IsSecurity != True):

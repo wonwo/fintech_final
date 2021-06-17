@@ -1,5 +1,4 @@
 from eth_account import Account
-from eth_utils.hexadecimal import encode_hex
 
 class Create():  
   def create_new(self,key):
