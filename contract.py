@@ -2,7 +2,7 @@ from web3 import Web3
 from eth_account import Account
 import json
 
-url = "https://ropsten.infura.io/v3/e15acf39b6cf48c3a5af30d897b4da9e"
+url = "https://goerli.infura.io/v3/9e6401388c364a918f27b5bf88cf83dd"
 
 w3 = Web3(Web3.HTTPProvider(url))
 
@@ -10,7 +10,7 @@ with open("./ABI.json", encoding='utf-8-sig') as f:
     info_json = json.load(f)
 abi = info_json
 
-contract_address = '0x8a6c13614c3e60d8622b2af2ea9a13a5a6ad1662'
+contract_address = '0xbD3F2B9a40458DFe8359edB211DD927AD9f9f340'
 Token_instance = w3.eth.contract(address = Web3.toChecksumAddress(contract_address), abi = abi)
 
 class accounts():
@@ -19,7 +19,6 @@ class accounts():
         self.address = address
     
 
-    #券商給帳戶錢
     def issue(self, to_address, amount):
         Token_tx = Token_instance.functions.issue(to_address,amount).buildTransaction({
             'from': self.address,
@@ -34,7 +33,7 @@ class accounts():
 
         return Token_Tx_hash.hex()
     
-    #券商更新股票價錢
+    # update price
     def updatePrice(self, amount):
         Token_tx = Token_instance.functions.updatePrice(amount).buildTransaction({
             'from': self.address,
@@ -49,7 +48,7 @@ class accounts():
 
         return Token_Tx_hash.hex()
 
-    #券商更新股票庫存
+    # update quantity
     def updateQuantity(self, amount):
         Token_tx = Token_instance.functions.updateQuantity(amount).buildTransaction({
             'from': self.address,
@@ -65,9 +64,7 @@ class accounts():
         return Token_Tx_hash.hex()
 
 
-
-
-    #投資者購買股票
+    # buy
     def buy(self,amount):
         Token_tx = Token_instance.functions.buy(amount).buildTransaction({
         'from': self.address,
@@ -82,7 +79,7 @@ class accounts():
 
         return Token_Tx_hash.hex()
 
-    #投資者販賣股票
+    # sell
     def sell(self,amount):
         Token_tx = Token_instance.functions.sell(amount).buildTransaction({
         'from': self.address,
@@ -97,18 +94,18 @@ class accounts():
 
         return Token_Tx_hash.hex()
 
-    def checkOwnBalance(self):
-        balance = Token_instance.functions.checkOwnBalance().call({'from': self.address})
-        return balance
+    def checkAddressBalance(self, to_address):
+        Balance = Token_instance.functions.checkAddressBalance(to_address).call({'from': self.address})
+        return Balance
 
-    def checkOwnStock(self):
-        myStock = Token_instance.functions.checkOwnStock().call({'from': self.address})
-        return myStock
+    def checkAddressQunatity(self, to_address):
+        quantity = Token_instance.functions.checkAddressQunatity(to_address).call({'from': self.address})
+        return quantity
 
     def checkPrice(self):
         price = Token_instance.functions.checkPrice().call({'from': self.address})
         return price
     
     def checkStockQuantity(self):
-        stockQuantity = Token_instance.functions.checkStockQuantity().call({'from': self.address})
+        stockQuantity = Token_instance.functions.checkQuantity().call({'from': self.address})
         return stockQuantity

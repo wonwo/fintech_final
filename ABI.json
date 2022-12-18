@@ -8,11 +8,10 @@
 			},
 			{
 				"internalType": "uint256",
-				"name": "setStockQuantity",
+				"name": "setItemQunatity",
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -38,32 +37,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "Buynotation",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_price",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_quantity",
-				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "_value",
-				"type": "uint256"
-			}
-		],
-		"name": "Sellnotation",
+		"name": "Buy",
 		"type": "event"
 	},
 	{
@@ -93,7 +67,6 @@
 		"type": "event"
 	},
 	{
-		"constant": false,
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -103,14 +76,18 @@
 		],
 		"name": "buy",
 		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [],
-		"name": "checkOwnBalance",
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "checkAddressBalance",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -118,14 +95,18 @@
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
-		"inputs": [],
-		"name": "checkOwnStock",
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "checkAddressQunatity",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -133,12 +114,10 @@
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [],
 		"name": "checkPrice",
 		"outputs": [
@@ -148,14 +127,12 @@
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": true,
 		"inputs": [],
-		"name": "checkStockQuantity",
+		"name": "checkQuantity",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -163,12 +140,10 @@
 				"type": "uint256"
 			}
 		],
-		"payable": false,
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"constant": false,
 		"inputs": [
 			{
 				"internalType": "address",
@@ -183,27 +158,10 @@
 		],
 		"name": "issue",
 		"outputs": [],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"constant": false,
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "sellQuantity",
-				"type": "uint256"
-			}
-		],
-		"name": "sell",
-		"outputs": [],
-		"payable": true,
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"constant": false,
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -213,12 +171,10 @@
 		],
 		"name": "updatePrice",
 		"outputs": [],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"constant": false,
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -228,7 +184,6 @@
 		],
 		"name": "updateQuantity",
 		"outputs": [],
-		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
