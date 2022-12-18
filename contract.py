@@ -10,7 +10,7 @@ with open("./ABI.json", encoding='utf-8-sig') as f:
     info_json = json.load(f)
 abi = info_json
 
-contract_address = '0xbD3F2B9a40458DFe8359edB211DD927AD9f9f340'
+contract_address = '0x85e1b9cEEC2cF76956Ca794F730eD01bDDb61Db3'
 Token_instance = w3.eth.contract(address = Web3.toChecksumAddress(contract_address), abi = abi)
 
 class accounts():
